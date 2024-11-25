@@ -27,7 +27,7 @@ const createCurrentUser = async (req: Request, res: Response): Promise<any> => {
       maxAge: 86400000,
     });
 
-    return res.status(200).json({ message: 'User registered successfully' });
+    return res.status(200).json({ message: 'User signed in successfully' });
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: 'Error creating user' });
