@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import myUserRoutes from './routes/myUserRoutes';
 import path from 'path';
 
+const port = process.env.PORT || 4000;
+
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
   .then(() => console.log('Connected to DB'));
@@ -26,6 +28,6 @@ app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 app.use('/api/users', myUserRoutes);
 
-app.listen(5000, () => {
-  console.log('Server running on localhost: 5000');
+app.listen(port, () => {
+  console.log('Server running on localhost:', port);
 });
