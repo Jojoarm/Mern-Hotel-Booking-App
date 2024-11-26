@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser';
 import myUserRoutes from './routes/myUserRoutes';
 import path from 'path';
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
