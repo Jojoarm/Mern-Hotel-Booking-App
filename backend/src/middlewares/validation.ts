@@ -30,3 +30,20 @@ export const validateUserLoginRequest = [
   }),
   handleValidationErrors,
 ];
+
+export const validateHotelRequest = [
+  check('name').notEmpty().withMessage('Name is required'),
+  check('city').notEmpty().withMessage('City is required'),
+  check('country').notEmpty().withMessage('Country is required'),
+  check('description').notEmpty().withMessage('Description is required'),
+  check('type').notEmpty().withMessage('Hotel type is required'),
+  check('pricePerNight')
+    .notEmpty()
+    .isNumeric()
+    .withMessage('Price per night is required and must be a number'),
+  check('facilities')
+    .notEmpty()
+    .isArray()
+    .withMessage('Facilities are required'),
+  handleValidationErrors,
+];
