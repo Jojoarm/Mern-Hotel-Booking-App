@@ -23,4 +23,6 @@ router.post(
   MyHotelController.createHotel
 );
 
+router.get('/', verifyToken, MyHotelController.getHotels);
+
 export default router;

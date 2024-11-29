@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import cloudinary from 'cloudinary';
-import Hotel, { HotelType } from '../models/hotel';
+import Hotel from '../models/hotel';
+import { HotelType } from '../shared/types';
 
 const createHotel = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -33,6 +34,23 @@ const createHotel = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+const getHotels = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const hotels = await Hotel.find({ userId: req?.userId });
+    if (!hotels) {
+      res
+        .status(404)
+        .json({ success: false, message: 'No hotel for user found!' });
+    }
+
+    res.json(hotels);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error getting hotels' });
+  }
+};
+
 export default {
   createHotel,
+  getHotels,
 };
