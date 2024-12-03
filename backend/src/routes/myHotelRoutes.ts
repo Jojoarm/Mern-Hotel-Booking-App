@@ -24,5 +24,13 @@ router.post(
 );
 
 router.get('/', verifyToken, MyHotelController.getHotels);
+router.get('/:id', verifyToken, MyHotelController.getHotel);
+
+router.put(
+  '/:hotelId',
+  verifyToken,
+  upload.array('imageFiles'),
+  MyHotelController.updateHotel
+);
 
 export default router;
