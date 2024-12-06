@@ -51,6 +51,18 @@ const searchHotels = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+const hotelDetails = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const id = req.params.id.toString();
+
+    const hotel = await Hotel.findById(id);
+    res.json(hotel);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
 const constructSearchQuery = (queryParams: any) => {
   let constructedQuery: any = {};
 
@@ -108,4 +120,5 @@ const constructSearchQuery = (queryParams: any) => {
 
 export default {
   searchHotels,
+  hotelDetails,
 };

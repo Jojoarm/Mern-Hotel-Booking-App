@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { check, validationResult } from 'express-validator';
+import { check, param, validationResult } from 'express-validator';
 
 const handleValidationErrors = async (
   req: Request,
@@ -45,5 +45,10 @@ export const validateHotelRequest = [
     .notEmpty()
     .isArray()
     .withMessage('Facilities are required'),
+  handleValidationErrors,
+];
+
+export const validateHotelDetails = [
+  param('id').notEmpty().withMessage('Hotel ID is required'),
   handleValidationErrors,
 ];
