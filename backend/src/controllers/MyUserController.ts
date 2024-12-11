@@ -78,6 +78,20 @@ const validateToken = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+const getCurrentUser = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId).select('-password');
+    if (!user) {
+      return res.status(400).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: 'Error getting user' });
+  }
+};
+
 const userLogout = async (req: Request, res: Response): Promise<any> => {
   try {
     res.cookie('auth_token', '', { expires: new Date(0) });
@@ -93,4 +107,5 @@ export default {
   loginUser,
   validateToken,
   userLogout,
+  getCurrentUser,
 };
