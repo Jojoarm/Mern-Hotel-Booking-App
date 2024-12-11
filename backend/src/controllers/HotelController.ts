@@ -5,6 +5,16 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 
+const getHotels = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const hotels = await Hotel.find().sort('-lastUpdated');
+    res.json(hotels);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+};
+
 const searchHotels = async (req: Request, res: Response): Promise<any> => {
   try {
     const query = constructSearchQuery(req.query);
@@ -209,6 +219,7 @@ const makeBooking = async (req: Request, res: Response): Promise<any> => {
 };
 
 export default {
+  getHotels,
   searchHotels,
   hotelDetails,
   stripePayment,

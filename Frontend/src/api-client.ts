@@ -103,6 +103,16 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => {
   });
 
   if (!response.ok) {
+    throw new Error('Failed to fetch user hotels');
+  }
+
+  return response.json();
+};
+
+export const fetchHotels = async (): Promise<HotelType[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/hotels`);
+
+  if (!response.ok) {
     throw new Error('Failed to fetch hotels');
   }
 
