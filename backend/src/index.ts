@@ -6,6 +6,8 @@ import cookieParser from 'cookie-parser';
 import myUserRoutes from './routes/myUserRoutes';
 import myHotelRoutes from './routes/myHotelRoutes';
 import hotelRoutes from './routes/hotelRoutes';
+import myBookingsRoute from './routes/myBookings';
+
 import path from 'path';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -38,6 +40,7 @@ app.use(express.static(path.join(__dirname, '../../Frontend/dist')));
 app.use('/api/users', myUserRoutes);
 app.use('/api/my-hotels', myHotelRoutes);
 app.use('/api/hotels', hotelRoutes);
+app.use('/api/my-bookings', myBookingsRoute);
 
 //for protected routes
 app.get('*', (req: Request, res: Response) => {
